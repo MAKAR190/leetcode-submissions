@@ -16,7 +16,4 @@ function minStartValue(nums: number[]): number {
             startValue += 1;
         }  
     }
-   
-        
- return startValue;
 };
