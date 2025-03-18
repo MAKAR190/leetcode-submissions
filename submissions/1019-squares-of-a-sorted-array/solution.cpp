@@ -1,29 +1,27 @@
 class Solution {
 public:
-    vector<int> sortedSquares(vector<int>& vec) {
-        for (int& num : vec) {
-            num = num * num; 
-        }
+    vector<int> sortedSquares(vector<int>& nums) {
+        int left = 0;
+        int right = nums.size() - 1;
+        vector<int> result(nums.size()); 
+        int index = nums.size() - 1;    
 
-        // Perform bubble sort
-        int n = vec.size();
-        bool swapped;
+        while (left <= right) {
+            int lel = nums[left] * nums[left];
+            int rel = nums[right] * nums[right];
 
-        for (int i = 0; i < n - 1; i++) {
-            swapped = false;
-
-            for (int j = 0; j < n - i - 1; j++) {
-                if (vec[j] > vec[j + 1]) {
-                    std::swap(vec[j], vec[j + 1]);
-                    swapped = true;
-                }
+            if (lel > rel) {
+                result[index] = lel;
+                left++;
+            } else {
+                result[index] = rel;
+                right--;
             }
-
-            if (!swapped)
-                break;
+            
+            index--; 
         }
-        
-        return vec; 
+
+        return result;
     }
 };
 
