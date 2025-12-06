@@ -1,9 +1,5 @@
 class Solution:
-    def insert(self, intervals: List[List[int]], newInterval: List[int]) -> List[List[int]]:
-        # Case 1: No overlapping before merging intervals
-        # Case 2: Overlapping and merging intervals
-        # Case 3: No overlapping after merging newInterval
-        
+    def insert(self, intervals: List[List[int]], newInterval: List[int]) -> List[List[int]]:        
         ans = []
         i = 0
         n = len(intervals)
@@ -13,9 +9,9 @@ class Solution:
             i += 1
         
         while i < n and intervals[i][0] <= newInterval[1]:
-            newInterval = [min(intervals[i][0], newInterval[0]), max(intervals[i][1], newInterval[1])]
+            newInterval[0], newInterval[1] = min(intervals[i][0], newInterval[0]), max(intervals[i][1], newInterval[1])
             i += 1
-        
+            
         ans.append(newInterval)
         
         while i < n:
