@@ -1,13 +1,17 @@
+from collections import defaultdict
 class Solution:
     def twoSum(self, nums: List[int], target: int) -> List[int]:
-        ind_distances = defaultdict(int)
-
+        remainders = defaultdict(list)
+        
         for i in range(len(nums)):
-            ind_distance = target - nums[i]
+            curr_target = target - nums[i]
 
-            if nums[i] in ind_distances:
-                return [ind_distances[nums[i]], i]
+            if curr_target in remainders:
+                return [remainders[curr_target][1], i]
+            
+            remainders[nums[i]] = [curr_target, i]
 
-            ind_distances[ind_distance] = i    
+        return []               
+
 
 
