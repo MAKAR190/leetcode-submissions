@@ -1,28 +1,16 @@
-# Defining the problem
-# nums = [2, 4, 9, 7] n * log(n) using sorting
-# Find the largest k-th element (prefering not using sorting)
-
-
-# Prefered approach
-# heap = [] - min heap
-# iterate through nums, push to the heap each one, but if heap exceeds k length, we pop from the heap
-# 
-
-# TC and SC
-# SC(k) and TC(n * log(k))
-
-# Debugging
-
 import heapq
+
+# [3,2,1,5,6,4]
+# [5, 6]
+
 class Solution:
-    def findKthLargest(self, nums: List[int], k: int) -> int: # k = 2
-        heap = []
+    def findKthLargest(self, nums: List[int], k: int) -> int:
+        min_heap = []
         
         for num in nums:
-            heapq.heappush(heap, num)
+            heapq.heappush(min_heap, num)
             
-            if len(heap) > k:
-                heapq.heappop(heap)
-            
-        return heapq.heappop(heap)
+            while len(min_heap) > k:
+                heapq.heappop(min_heap)
         
+        return min_heap[0]
