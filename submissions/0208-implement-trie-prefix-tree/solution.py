@@ -1,37 +1,43 @@
 class Trie:
+    END_CHARACTER = "*"
+    
     def __init__(self):
         self.children = {}
-        self.deadend = False
 
     def insert(self, word: str) -> None:
-        curr = self
-        for c in word:
-            if c not in curr.children:
-                curr.children[c] = Trie()
-            curr = curr.children[c]
-            
-        curr.deadend = True
+        root = self
         
-    def search(self, word: str) -> bool:
-        curr = self
         for c in word:
-            if c in curr.children:
-                curr = curr.children[c]
-            else:
-                return False
+            if c not in root.children:
+                root.children[c] = Trie()
+                
+            root = root.children[c]
             
-        return curr.deadend
+        root.children[self.END_CHARACTER] = True
+
+    def search(self, word: str) -> bool:
+        root = self
+        
+        for c in word:
+            if c not in root.children:
+                return False
+                
+            root = root.children[c]
+            
+        return self.END_CHARACTER in root.children
 
     def startsWith(self, prefix: str) -> bool:
-        curr = self
+        root = self
+        
         for c in prefix:
-            if c in curr.children:
-                curr = curr.children[c]
-            else:
+            if c not in root.children:
                 return False
-            
+                
+            root = root.children[c]
+        
         return True
-                    
+
+
 # Your Trie object will be instantiated and called as such:
 # obj = Trie()
 # obj.insert(word)
